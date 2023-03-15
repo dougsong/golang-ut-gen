@@ -105,11 +105,10 @@ public class GenUTAction extends AnAction {
 
         // import and fmt
         try {
-            Process process = Runtime.getRuntime().exec(new String[]{"goimports", "-w", testFilePath});
-            process.wait();
+            Runtime.getRuntime().exec(new String[]{"goimports", "-w", testFilePath});
             Runtime.getRuntime().exec(new String[]{"go", "fmt", testFilePath});
         } catch (Exception ex) {
-            LOGGER.error("import and fmt error");
+            LOGGER.error(ex);
         }
     }
 
