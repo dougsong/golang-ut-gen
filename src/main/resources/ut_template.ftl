@@ -65,4 +65,5 @@ func Test${ut.testFuncName}(t *testing.T) {
         })
     }
 }
+
 </#list>
