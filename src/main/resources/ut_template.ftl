@@ -5,12 +5,12 @@ import (
     "reflect"
     "testing"
 
-    ."github.com/bytedance/mockey"
+    . "github.com/bytedance/mockey"
     "github.com/stretchr/testify/assert"
 )
 
 <#list unitTests as ut>
-func Test${ut.testFuncName}(t *testing.T) {
+func Test<#if ut.interfaceFunc>${ut.receiver.type}_${ut.funcName}<#else>${ut.testFuncName}</#if>(t *testing.T) {
     type args struct {
     <#list ut.args as arg>
         ${arg.name} ${arg.type}
@@ -43,9 +43,9 @@ func Test${ut.testFuncName}(t *testing.T) {
             //	Return(tt.mocks.mockLaunchTemplate, tt.mocks.mockGetByIdOrNameErr).Build()
 
             <#if ut.wants?? && (ut.wants?size > 0)>
-            <#list ut.wants as want>${want.name}<#if want_has_next>, </#if></#list>:= ${ut.funcName}(<#list ut.args as arg>tt.args.${arg.name}<#if arg_has_next>, </#if></#list>)
+            <#list ut.wants as want>${want.name}<#if want_has_next>, </#if></#list>:= <#if ut.interfaceFunc>(&${ut.receiver.type}{}).${ut.funcName}<#else>${ut.funcName}</#if>(<#list ut.args as arg>tt.args.${arg.name}<#if arg_has_next>, </#if></#list>)
             <#else>
-            ${ut.funcName}(<#list ut.args as arg>tt.args.${arg.name}<#if arg_has_next>, </#if></#list>)
+            <#if ut.interfaceFunc>(&${ut.receiver.type}{}).${ut.funcName}<#else>${ut.funcName}</#if>(<#list ut.args as arg>tt.args.${arg.name}<#if arg_has_next>, </#if></#list>)
             </#if>
 
             <#list ut.wants as want>
