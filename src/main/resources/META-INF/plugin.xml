@@ -5,14 +5,23 @@
     <vendor>dougsong</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <depends>org.jetbrains.plugins.go</depends>
+    <depends>com.intellij.modules.goland</depends>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.dougsong.golangutgen.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-    </extensions>
+<!--    <extensions defaultExtensionNs="com.intellij">-->
+<!--        <toolWindow factoryClass="com.github.dougsong.golangutgen.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>-->
+<!--    </extensions>-->
 
-    <applicationListeners>
-        <listener class="com.github.dougsong.golangutgen.listeners.MyFrameStateListener" topic="com.intellij.ide.FrameStateListener"/>
-    </applicationListeners>
+<!--    <applicationListeners>-->
+<!--        <listener class="com.github.dougsong.golangutgen.listeners.MyFrameStateListener" topic="com.intellij.ide.FrameStateListener"/>-->
+<!--    </applicationListeners>-->
+
+    <actions>
+        <action class="com.github.dougsong.golangutgen.actions.GenUTAction" id="GenerateUTAction" popup="true" text="生成单元测试">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+    </actions>
 </idea-plugin>

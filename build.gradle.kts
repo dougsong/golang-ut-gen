@@ -32,6 +32,10 @@ kotlin {
     jvmToolchain(11)
 }
 
+dependencies {
+    implementation("org.freemarker:freemarker:2.3.14")
+}
+
 // Configure Gradle IntelliJ Plugin - read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
     pluginName.set(properties("pluginName"))
